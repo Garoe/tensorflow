@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+# PYTHON_ARGCOMPLETE_OK
 """Serve TensorFlow summary data to a web frontend.
 
 This is a simple web server to proxy data from the event_loader to the web, and
@@ -23,6 +24,7 @@ from __future__ import print_function
 
 import os
 import socket
+import argcomplete
 
 from tensorflow.python.platform import app
 from tensorflow.python.platform import flags
@@ -32,6 +34,7 @@ from tensorflow.python.platform import tf_logging as logging
 from tensorflow.python.summary import event_file_inspector as efi
 from tensorflow.python.summary import event_multiplexer
 from tensorflow.tensorboard.backend import server
+
 
 flags.DEFINE_string('logdir', '', """logdir specifies the directory where
 TensorBoard will look to find TensorFlow event files that it can display.
@@ -82,6 +85,8 @@ flags.DEFINE_boolean('purge_orphaned_data', True, 'Whether to purge data that '
 
 flags.DEFINE_integer('reload_interval', 60, 'How often the backend should load '
                      'more data.')
+
+argcomplete.autocomplete(flags._global_parser)
 
 FLAGS = flags.FLAGS
 
